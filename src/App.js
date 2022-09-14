@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const btnMax = () => {
+    setTemperatureValue(temperatureValue + 1);
+    if (temperatureValue+1 > 15) {
+        setTemperatureColor('tempHot')
+    }
+  };
+
+  const btnMin = () => {
+    setTemperatureValue(temperatureValue - 1);
+    if (temperatureValue-1 <= 15) {
+        setTemperatureColor('tempCold')
+    }
+  };
+
+  const [temperatureValue, setTemperatureValue] = useState(0);
+  const [temperatureColor, setTemperatureColor] = useState('tempCold');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <div className={`temperature-display-container ${temperatureColor}` }>
+        <div className="temperature-display">{temperatureValue}° C</div>
+      </div>
+      <div className="button-container">
+        <button className="btn btnMax" onClick={btnMax}>
+          +
+        </button>
+        <button className="btn btnMin" onClick={btnMin}>
+          -
+        </button>
+      </div>
     </div>
   );
 }
